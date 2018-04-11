@@ -1,0 +1,37 @@
+﻿@using api.aspnet4you.mvc5.Models
+@model ExternalLoginListViewModel
+@using Microsoft.Owin.Security
+
+<h2>Use External Identity Provider to log in.</h2>
+<hr />
+@{
+    var loginProviders = Context.GetOwinContext().Authentication.GetExternalAuthenticationTypes();
+    if (loginProviders.Count() == 0)
+    {
+        <div>
+            <p>There are no external authentication services configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=313242">this article</a>
+            for details on setting up this ASP.NET application to support logging in via external services.</p>
+        </div>
+    }
+    else
+    {
+        <div>
+            <p>
+                Security and privacy is paramount important to you (and "US") and you are in complete control
+                of authorization. Most importanly, you NEVER give your user/password to anyone other than the Identity Provider (i.e. LinkedIn) you trust.
+            </p>
+        </div>
+        using (Html.BeginForm(Model.Action, "Account", new { ReturnUrl = Model.ReturnUrl }))
+        {
+            @Html.AntiForgeryToken()
+            <div id="socialLoginList">
+                <p>
+                @foreach (AuthenticationDescription p in loginProviders)
+                {
+                    <button type="submit" style="background-image: url('../Images/linkedinbuttons/Non-Retina/Sign-in-Small---Active.png'); cursor: pointer; width: 146px; height: 21px" id="@p.AuthenticationType" name="provider" value="@p.AuthenticationType" title="Log in using your @p.Caption account"></button>
+                }
+                </p>
+            </div>
+        }
+    }
+}

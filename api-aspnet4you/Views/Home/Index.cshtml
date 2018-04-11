@@ -1,0 +1,93 @@
+﻿@inherits System.Web.Mvc.WebViewPage<api.aspnet4you.mvc5.Models.ImageModel>
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Welcome to api.aspnet4you.com</title>
+    <style>
+        h1 {
+            color: blue;
+            font-family: verdana;
+            font-size: 150%;
+        }
+
+        p {
+            color: red;
+            font-family: courier;
+            font-size: 160%;
+        }
+
+        table {
+            border-collapse: collapse;
+        }
+
+        table, th, td {
+            border: 1px solid black;
+            background-color:chartreuse
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <h1>
+            Welcome to api.aspnet4you.com!
+        </h1>
+        <p style="width: 780px">
+            api.aspnet4you.com is the middle tier of n-tier distributed applications. api.aspnet4you.com is responsible for providing services to presentation layers (i.e. azure.aspnet4you.com) 
+            and to other clients/services. I wish I can model this service as Micro-Service but it would be too much of overhead for this demo project.
+            Both the Web Controller and Api Controller are used in the same project for demo purpose. You would separate those layers in real-world application.
+            <br />
+            <br />
+            The presentation layer of this application demonstrates how to display images in browser those are retrieved from DB or file server as byte array.    
+        </p>
+        <p style="width: 780px">
+            Looking for Swagger Api Documentations? It's <a href="http://api.aspnet4you.com/swagger" target="_blank">here</a>
+        </p>
+        <p style="width: 780px">
+            You can read the article or download source codes- <a href="http://blogs.aspnet4you.com/index.php/2017/10/24/display-image-from-byte-array-in-asp-net-mvc/" target="_blank">here</a>
+        </p>
+        <br />
+</div>
+   
+    <div style="">
+        <h1>It's fun loading image from DB on the fly!</h1>
+        <table border="1">
+            <tbody>
+                <tr>
+                    <th>Model Property</th>
+                    <th>Model Value</th>
+                </tr>
+                <tr>
+                    <td>Image Id:</td>
+                    <td>@Model.Id</td>
+                </tr>
+                <tr>
+                    <td>Image Name:</td>
+                    <td>@Model.Name</td>
+                </tr>
+                <tr>
+                    <td>Image ContentType:</td>
+                    <td>@Model.ContentType</td>
+                </tr>
+                <tr>
+                    <td>Image Size (bytes):</td>
+                    <td>@Model.Data.Length</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div>
+        <br />
+        <h1>Application Architecture</h1>
+        <br />
+        <img src='@Url.Action("ShowAppArchitecture", "Home")' />
+    </div>
+    
+</body>
+</html>
